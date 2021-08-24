@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    padding: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.grid {
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.squareStyle {
+    width: 20px;
+    height: 20px;
+    background: red;
+}
