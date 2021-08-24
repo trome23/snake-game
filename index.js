@@ -4,6 +4,7 @@ const score = document.querySelector("#score")
 let squares = []
 let currentSnake = [2,1,0]
 let direction = 1
+let width = 10
 
 function createGrid() {
     //creating 100 divs 
@@ -33,3 +34,21 @@ function move() {
     squares[currentSnake[0]].classList.add('snake')
 }
 move()
+
+let timerID = setInterval(move, 1000)
+
+function control(e) {
+    //grabbing event keys and setting the direction based on 'keydown' eventlistener
+    if(e.key === 'ArrowRight' ) {
+        direction = 1
+    } else if(e.key === 'ArrowUp') {
+        direction = - width
+    } else if(e.key === 'ArrowLeft') {
+        direction = -1
+    } else if(e.key === 'ArrowDown') {
+        direction = + width
+    }
+}
+
+document.addEventListener('keydown', control)
+
