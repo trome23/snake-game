@@ -1,11 +1,13 @@
 const grid = document.querySelector(".grid")
 const startBtn = document.querySelector("#start-btn")
-const score = document.querySelector("#score")
+const scoreBoard = document.querySelector("#score")
 const width = 10
 let squares = []
 let currentSnake = [2,1,0]
 let direction = 1
 let appleIndex = 0
+let score = 0
+let intervalTime = 1000
 
 function createGrid() {
     //creating 100 divs 
@@ -45,24 +47,25 @@ function move() {
         squares[currentSnake[0]].classList.remove("apple")
         //grow snake by adding class of snake to it
         squares[tail].classList.add("snake")
-        console.log(tail)
         //grow snake array
         currentSnake.push(tail)
         //create new apple
         createApples()
         //add one to the score
-
+        score++
+        //display score
+        scoreBoard.textContent = score
         //speed up our snake
-
-
+        clearInterval(timerID)
+        intervalTime = intervalTime * 0.9
+        timerID = setInterval(move, intervalTime)
     }
-
 
     squares[currentSnake[0]].classList.add("snake") //<== add styling so we can see it move
 }
 move()
 
-let timerID = setInterval(move, 1000)  //<==setting speed of snake in milliseconds and calling move() function
+let timerID = setInterval(move, intervalTime)  //<==setting speed of snake in milliseconds and calling move() function
 
 function createApples() {
     do {
