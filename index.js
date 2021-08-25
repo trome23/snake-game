@@ -8,6 +8,8 @@ let direction = 1
 let appleIndex = 0
 let score = 0
 let intervalTime = 1000
+let speed = 0.7
+let timerID = 0
 
 function createGrid() {
     //creating 100 divs 
@@ -24,6 +26,24 @@ function createGrid() {
 createGrid()
 
 currentSnake.forEach(index => squares[index].classList.add('snake'))
+
+function startGame() {
+    //remove snake from grid
+    currentSnake.forEach(index => squares[index].classList.remove('snake'))
+    //remove apple
+    squares[appleIndex].classList.remove("apple")
+    clearInterval(timerID)
+    currentSnake = [2,1,0]
+    score = 0
+    //clear score and set back to 0 in DOM
+    scoreBoard.textContent = 0
+    direction = 1
+    intervalTime = 1000
+    createApples()
+    //add class of snake to new currentSnake
+    currentSnake.forEach(index => squares[index].classList.add('snake'))
+    timerID = setInterval(move, intervalTime)  //<==setting speed of snake in milliseconds and calling move() function
+}
 
 function move() {
     //how to know if snake is hitting any of the 4 walls
@@ -57,15 +77,12 @@ function move() {
         scoreBoard.textContent = score
         //speed up our snake
         clearInterval(timerID)
-        intervalTime = intervalTime * 0.9
+        intervalTime = intervalTime * speed
         timerID = setInterval(move, intervalTime)
     }
 
     squares[currentSnake[0]].classList.add("snake") //<== add styling so we can see it move
 }
-move()
-
-let timerID = setInterval(move, intervalTime)  //<==setting speed of snake in milliseconds and calling move() function
 
 function createApples() {
     do {
@@ -88,4 +105,5 @@ function control(e) {
 }
 
 document.addEventListener('keydown', control)
+startBtn.addEventListener('click', startGame)
 
