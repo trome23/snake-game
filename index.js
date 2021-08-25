@@ -34,10 +34,31 @@ function move() {
     )
     return clearInterval(timerID) //<== stop snake from moving
 
+
     const tail = currentSnake.pop() //<==remove last element from current snake array
     squares[tail].classList.remove('snake')  //<==remove styling from last element
     currentSnake.unshift(currentSnake[0] + direction) //<== add square to direction snake is moving
-    squares[currentSnake[0]].classList.add('snake') //<== add styling so we can see it move
+
+    //snake eating the apple
+    if (squares[currentSnake[0]].classList.contains("apple")) {
+        //remove the class 'apple'
+        squares[currentSnake[0]].classList.remove("apple")
+        //grow snake by adding class of snake to it
+        squares[tail].classList.add("snake")
+        console.log(tail)
+        //grow snake array
+        currentSnake.push(tail)
+        //create new apple
+        createApples()
+        //add one to the score
+
+        //speed up our snake
+
+
+    }
+
+
+    squares[currentSnake[0]].classList.add("snake") //<== add styling so we can see it move
 }
 move()
 
