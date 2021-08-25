@@ -24,6 +24,14 @@ createGrid()
 currentSnake.forEach(index => squares[index].classList.add('snake'))
 
 function move() {
+    //how to know if snake is hitting any of the 4 walls
+    if (
+        (currentSnake[0] + 10 >= 100 && direction === 10) ||
+        (currentSnake[0] % 10 === 0 && direction === -1) ||
+        (currentSnake[0] % 10 >= 9 && direction === +1) ||
+        (currentSnake[0] - 10 < 0 && direction === -10) 
+    )
+    return clearInterval(timerID)
     //remove last element from current snake array
     const tail = currentSnake.pop()   
     //remove styling from last element
